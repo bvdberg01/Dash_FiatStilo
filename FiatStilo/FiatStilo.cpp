@@ -47,7 +47,7 @@ QList<QWidget *> FiatStilo::widgets()
 {
     QList<QWidget *> tabs;
     tabs.append(this->vehicle);
-    tabs.append(this->climate);
+    // tabs.append(this->climate);
     if(DEBUG)
         tabs.append(this->debug);
     return tabs;
