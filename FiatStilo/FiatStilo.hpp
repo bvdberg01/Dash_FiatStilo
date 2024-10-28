@@ -54,7 +54,7 @@ class FiatStilo : public QObject, VehiclePlugin
 
         void monitorHeadlightStatus(QByteArray payload);
         void engineUpdate(QByteArray payload);
-        void brakePedalUpdate(QByteArray payload);
+        void EXTERNAL_LIGHTS(QByteArray payload);
         void steeringWheelUpdate(QByteArray payload);
 
 

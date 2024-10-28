@@ -23,7 +23,7 @@ bool FiatStilo::init(ICANBus* canbus){
 
         canbus->registerFrameHandler(0x60D, [this](QByteArray payload){this->monitorHeadlightStatus(payload);});
         canbus->registerFrameHandler(0x551, [this](QByteArray payload){this->engineUpdate(payload);});
-        canbus->registerFrameHandler(0x354, [this](QByteArray payload){this->brakePedalUpdate(payload);});
+        canbus->registerFrameHandler(0x180 , [this](QByteArray payload){this->EXTERNAL_LIGHTS(payload);});
         canbus->registerFrameHandler(0x002, [this](QByteArray payload){this->steeringWheelUpdate(payload);});
         return true;
     }
@@ -75,9 +75,9 @@ void FiatStilo::steeringWheelUpdate(QByteArray payload){
 //     4 - off
 //     20 - pressed a bit
 
-void FiatStilo::brakePedalUpdate(QByteArray payload){
+void FiatStilo::EXTERNAL_LIGHTS(QByteArray payload){
     bool brakePedalUpdate = false;
-    if((payload.at(6) == 20)) brakePedalUpdate = true;
+    if((payload.at(6) == 128)) brakePedalUpdate = true;
     this->vehicle->taillights(brakePedalUpdate);   
 }
 
