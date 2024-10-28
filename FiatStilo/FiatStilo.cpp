@@ -1,9 +1,9 @@
-#include "infiniti_g37.hpp"
+#include "FiatStilo.hpp"
 
 #define DEBUG false
 
 
-InfinitiG37::~InfinitiG37()
+FiatStilo::~FiatStilo()
 {
     if (this->climate)
         delete this->climate;
@@ -11,7 +11,7 @@ InfinitiG37::~InfinitiG37()
         delete this->vehicle;
 }
 
-bool InfinitiG37::init(ICANBus* canbus){
+bool FiatStilo::init(ICANBus* canbus){
     this->duelClimate=false;
     if (this->arbiter) {
         this->aa_handler = this->arbiter->android_auto().handler;
@@ -45,7 +45,7 @@ bool InfinitiG37::init(ICANBus* canbus){
 
 }
 
-QList<QWidget *> InfinitiG37::widgets()
+QList<QWidget *> FiatStilo::widgets()
 {
     QList<QWidget *> tabs;
     tabs.append(this->vehicle);
@@ -71,7 +71,7 @@ QList<QWidget *> InfinitiG37::widgets()
 
 // OTHERS UNKNOWN
 
-void InfinitiG37::tpmsUpdate(QByteArray payload){
+void FiatStilo::tpmsUpdate(QByteArray payload){
     if(DEBUG){
         this->debug->tpmsOne->setText(QString::number((uint8_t)payload.at(2)/4));
         this->debug->tpmsTwo->setText(QString::number((uint8_t)payload.at(3)/4));
@@ -102,7 +102,7 @@ void InfinitiG37::tpmsUpdate(QByteArray payload){
 //     0x20 / 32 - Engine off
 
 
-void InfinitiG37::engineUpdate(QByteArray payload){
+void FiatStilo::engineUpdate(QByteArray payload){
     if((payload.at(3) == 0x80)) engineRunning = true;
     else
     {
@@ -115,7 +115,7 @@ void InfinitiG37::engineUpdate(QByteArray payload){
 
 //002
 
-void InfinitiG37::steeringWheelUpdate(QByteArray payload){
+void FiatStilo::steeringWheelUpdate(QByteArray payload){
     uint16_t rawAngle = payload.at(1);
     rawAngle = rawAngle<<8;
     rawAngle |= payload.at(0);
@@ -133,7 +133,7 @@ void InfinitiG37::steeringWheelUpdate(QByteArray payload){
 //     4 - off
 //     20 - pressed a bit
 
-void InfinitiG37::brakePedalUpdate(QByteArray payload){
+void FiatStilo::brakePedalUpdate(QByteArray payload){
     bool brakePedalUpdate = false;
     if((payload.at(6) == 20)) brakePedalUpdate = true;
     // if(brakePedalUpdate != this->brakePedal){
@@ -151,7 +151,7 @@ void InfinitiG37::brakePedalUpdate(QByteArray payload){
 // |unknown|unknown|unknown|unknown|unknown|left turn signal light|right turn signal light|FOGLIGHTS|
 // OTHERS UNKNOWN
 
-void InfinitiG37::monitorHeadlightStatus(QByteArray payload){
+void FiatStilo::monitorHeadlightStatus(QByteArray payload){
     if((payload.at(0)>>1) & 1){
         //headlights are ON - turn to dark mode
         if(this->arbiter->theme().mode == Session::Theme::Light){
@@ -212,7 +212,7 @@ void InfinitiG37::monitorHeadlightStatus(QByteArray payload){
 
 bool oldStatus = true;
 
-void InfinitiG37::updateClimateDisplay(QByteArray payload){
+void FiatStilo::updateClimateDisplay(QByteArray payload){
     duelClimate = (payload.at(3)>>5) & 1;
     bool hvacOff = payload.at(0) & 1;
     if(hvacOff != oldStatus){
@@ -261,7 +261,7 @@ void InfinitiG37::updateClimateDisplay(QByteArray payload){
 // entire byte is passenger side temperature, 60F->90F
 // note that this byte is only updated when duel climate is on. When duel climate is off, SECOND BYTE contains accurate passenger temperature.
 
-void InfinitiG37::updateTemperatureDisplay(QByteArray payload){
+void FiatStilo::updateTemperatureDisplay(QByteArray payload){
     if(climate->left_temp()!=(unsigned char)payload.at(1))
         climate->left_temp((unsigned char)payload.at(1));
     if(duelClimate){

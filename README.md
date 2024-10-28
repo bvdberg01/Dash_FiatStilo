@@ -1,22 +1,7 @@
-# Dash_InfinitiG37
+# Dash_FiatStilo
 
-This repo contains a Vehicle Plugin for [Dash](https://github.com/OpenDsh/dash/) to support a 2011 InfinitiG37.
+This repo contains a Vehicle Plugin for [Dash](https://github.com/OpenDsh/dash/) to support a Fiat Stilo.
 
 Current functionality:
 
-* Automatic day/night theme switching based on the headlight status of the car
-* HVAC/Climate Integration (read only)
-* Tire Pressure Monitoring
-* Dash Vehicle Widget Integration (headlight status, taillight status, blinkers, doors open/close)
-* Pause android auto music when the engine turns off
-
-
-
-This repo also contains a .dbc file that I use for reverse engineering the signals of the G37 from within my fork of [Cabana](https://github.com/icecube45/cabana)
-
-
-
-It is likely that this plugin works with other years of G37, or even across the Nissan/Infiniti lines. However I make no guarantees.
-
-
-
+* -

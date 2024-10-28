@@ -28,15 +28,15 @@ class DebugWindow : public QWidget {
 
 };
 
-class InfinitiG37 : public QObject, VehiclePlugin
+class FiatStilo : public QObject, VehiclePlugin
 {
     Q_OBJECT
     Q_PLUGIN_METADATA(IID VehiclePlugin_iid)
     Q_INTERFACES(VehiclePlugin)
 
     public:
-        InfinitiG37() {};
-        ~InfinitiG37();
+        FiatStilo() {};
+        ~FiatStilo();
         bool init(ICANBus* canbus) override;
         QList<QWidget *> widgets() override;
 
