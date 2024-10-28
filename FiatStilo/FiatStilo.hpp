@@ -66,5 +66,6 @@ class FiatStilo : public QObject, VehiclePlugin
         Climate *climate;
         Vehicle *vehicle;
         AAHandler *aa_handler;
+        DebugWindow *debug;
         bool engineRunning = false;
 };

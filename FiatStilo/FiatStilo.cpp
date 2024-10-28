@@ -140,3 +140,22 @@ void FiatStilo::monitorHeadlightStatus(QByteArray payload){
 }
 
 
+bool oldStatus = true;
+
+
+DebugWindow::DebugWindow(Arbiter &arbiter, QWidget *parent) : QWidget(parent)
+{
+    this->setObjectName("Debug");
+
+
+    QLabel* textOne = new QLabel("Front Right PSI", this);
+    QLabel* textTwo = new QLabel("Front Left PSI", this);
+    QLabel* textThree = new QLabel("Rear Right PSI", this);
+    QLabel* textFour = new QLabel("Rear Left PSI", this);
+
+    tpmsOne = new QLabel("--", this);
+    tpmsTwo = new QLabel("--", this);
+    tpmsThree = new QLabel("--", this);
+    tpmsFour = new QLabel("--", this);
+
+}
