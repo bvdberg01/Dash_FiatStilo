@@ -18,10 +18,6 @@ class DebugWindow : public QWidget {
 
     public:
         DebugWindow(Arbiter &arbiter, QWidget *parent = nullptr);
-        QLabel* tpmsOne;
-        QLabel* tpmsTwo;
-        QLabel* tpmsThree;
-        QLabel* tpmsFour;
 
 };
 
@@ -58,7 +54,6 @@ class FiatStilo : public QObject, VehiclePlugin
 
         void monitorHeadlightStatus(QByteArray payload);
         void engineUpdate(QByteArray payload);
-        void tpmsUpdate(QByteArray payload);
         void brakePedalUpdate(QByteArray payload);
         void steeringWheelUpdate(QByteArray payload);
 

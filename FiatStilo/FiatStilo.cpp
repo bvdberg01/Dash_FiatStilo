@@ -45,25 +45,6 @@ QList<QWidget *> FiatStilo::widgets()
 }
 
 
-void FiatStilo::tpmsUpdate(QByteArray payload){
-    if(DEBUG){
-        this->debug->tpmsOne->setText(QString::number((uint8_t)payload.at(2)/4));
-        this->debug->tpmsTwo->setText(QString::number((uint8_t)payload.at(3)/4));
-        this->debug->tpmsThree->setText(QString::number((uint8_t)payload.at(4)/4));
-        this->debug->tpmsFour->setText(QString::number((uint8_t)payload.at(5)/4));
-    }
-    uint8_t newRrPressure = (uint8_t)payload.at(4)/4;
-    uint8_t newRlPressure = (uint8_t)payload.at(5)/4;
-    uint8_t newFrPressure = (uint8_t)payload.at(2)/4;
-    uint8_t newFlPressure = (uint8_t)payload.at(3)/4;
-
-    this->vehicle->pressure(Position::BACK_RIGHT,newRrPressure);
-    this->vehicle->pressure(Position::BACK_LEFT, newRlPressure);
-    this->vehicle->pressure(Position::FRONT_RIGHT,newFrPressure);
-    this->vehicle->pressure(Position::FRONT_LEFT, newFlPressure);
-
-}
-
 
 
 void FiatStilo::engineUpdate(QByteArray payload){
@@ -146,5 +127,4 @@ bool oldStatus = true;
 DebugWindow::DebugWindow(Arbiter &arbiter, QWidget *parent) : QWidget(parent)
 {
     this->setObjectName("Debug");
-
 }
