@@ -80,7 +80,9 @@ void FiatStilo::EXTERNAL_LIGHTS(QByteArray payload){
     if((payload.at(6) == 128)){
         brakePedalUpdate = true;
     }
-    this->vehicle->taillights(brakePedalUpdate);   
+    this->vehicle->taillights(brakePedalUpdate);
+    qDebug() << "Value at payload.at(6): " << static_cast<int>(payload.at(6));
+
 }
 
 // HEADLIGHTS AND DOORS
