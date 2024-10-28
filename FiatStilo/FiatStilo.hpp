@@ -13,9 +13,6 @@
 #include "AAHandler.hpp"
 
 
-#define G37_LOG(severity) BOOST_LOG_TRIVIAL(severity) << "[G37VehiclePlugin] "
-
-
 class DebugWindow : public QWidget {
     Q_OBJECT
 

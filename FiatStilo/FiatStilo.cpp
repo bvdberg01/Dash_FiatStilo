@@ -19,7 +19,7 @@ bool FiatStilo::init(ICANBus* canbus){
         this->climate->max_fan_speed(7);
         this->climate->setObjectName("Climate");
         this->vehicle = new Vehicle(*this->arbiter);
-        this->vehicle->setObjectName("Infiniti G37");
+        this->vehicle->setObjectName("Fiat Stilo");
         this->vehicle->pressure_init("psi", 30);
         this->vehicle->disable_sensors();
         this->vehicle->rotate(270);
@@ -34,11 +34,9 @@ bool FiatStilo::init(ICANBus* canbus){
         canbus->registerFrameHandler(0x385, [this](QByteArray payload){this->tpmsUpdate(payload);});
         canbus->registerFrameHandler(0x354, [this](QByteArray payload){this->brakePedalUpdate(payload);});
         canbus->registerFrameHandler(0x002, [this](QByteArray payload){this->steeringWheelUpdate(payload);});
-        G37_LOG(info)<<"loaded successfully";
         return true;
     }
     else{
-        G37_LOG(error)<<"Failed to get arbiter";
         return false;
     }
     
@@ -124,7 +122,6 @@ void FiatStilo::steeringWheelUpdate(QByteArray payload){
     else degAngle = rawAngle/10;
     degAngle = degAngle/16.4;
     this->vehicle->wheel_steer(degAngle);
-    //G37_LOG(info)<<"raw: "<<rawAngle<<" deg "<<degAngle;
 }
 
 //354
@@ -220,7 +217,6 @@ void FiatStilo::updateClimateDisplay(QByteArray payload){
         if(hvacOff){
             climate->airflow(Airflow::OFF);
             climate->fan_speed(0);
-            G37_LOG(info)<<"Climate is off";
             return;
         }
     }
