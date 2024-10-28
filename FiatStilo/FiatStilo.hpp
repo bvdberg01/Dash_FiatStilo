@@ -57,8 +57,6 @@ class FiatStilo : public QObject, VehiclePlugin
         uint8_t rlPressure = 0;
 
         void monitorHeadlightStatus(QByteArray payload);
-        void updateClimateDisplay(QByteArray payload);
-        void updateTemperatureDisplay(QByteArray payload);
         void engineUpdate(QByteArray payload);
         void tpmsUpdate(QByteArray payload);
         void brakePedalUpdate(QByteArray payload);
@@ -68,6 +66,5 @@ class FiatStilo : public QObject, VehiclePlugin
         Climate *climate;
         Vehicle *vehicle;
         AAHandler *aa_handler;
-        DebugWindow *debug;
         bool engineRunning = false;
 };
