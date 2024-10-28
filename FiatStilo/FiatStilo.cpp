@@ -77,7 +77,9 @@ void FiatStilo::steeringWheelUpdate(QByteArray payload){
 
 void FiatStilo::EXTERNAL_LIGHTS(QByteArray payload){
     bool brakePedalUpdate = false;
-    if((payload.at(6) == 128)) brakePedalUpdate = true;
+    if((payload.at(6) == 128)){
+        brakePedalUpdate = true;
+    }
     this->vehicle->taillights(brakePedalUpdate);   
 }
 
