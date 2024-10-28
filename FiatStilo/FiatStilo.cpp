@@ -23,7 +23,6 @@ bool FiatStilo::init(ICANBus* canbus){
 
         canbus->registerFrameHandler(0x60D, [this](QByteArray payload){this->monitorHeadlightStatus(payload);});
         canbus->registerFrameHandler(0x551, [this](QByteArray payload){this->engineUpdate(payload);});
-        canbus->registerFrameHandler(0x385, [this](QByteArray payload){this->tpmsUpdate(payload);});
         canbus->registerFrameHandler(0x354, [this](QByteArray payload){this->brakePedalUpdate(payload);});
         canbus->registerFrameHandler(0x002, [this](QByteArray payload){this->steeringWheelUpdate(payload);});
         return true;
